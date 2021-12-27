@@ -1,7 +1,11 @@
 ## code to prepare `parc` dataset goes here
 library(sf)
 library(raster)
-r <- raster("../data/mnt_par_adj/")
+
+parc <- read_sf("data-raw/parcelle_adj.shp")
+
+r <- raster("data-raw/mnt_par_adj/")
+r <- readAll(r)
 s <- terrain(r,opt = c("slope", "aspect", "TPI", "TRI") )
 scrop <- crop(s,parc)
 scrop <- mask(scrop,parc)
